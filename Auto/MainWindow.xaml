@@ -1,0 +1,50 @@
+﻿<Window x:Class="Auto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Auto"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Auto wählen:   </TextBlock>
+        <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="200px" Name="CarComboBox" SelectionChanged="CarComboBox_SelectionChanged">
+        </ComboBox>
+        <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="PSContainer"></TextBlock>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Click="Starten_OnClick" Name="Start_Button" Background="Red">starten</Button>
+            <Button Grid.Row="1">hupen</Button>
+            <Button Grid.Row="2" Click="Tanken_OnClick">tanken</Button>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition Height="0.4*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="40" Text="0" Name="Geschwindigkeit"></TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="40" Name="Gang"></TextBlock>
+            <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Minimum="0" Maximum="100" Value="0" Name="FuelLevel"></ProgressBar>
+        </Grid>
+        <Button Grid.Row="2" Grid.Column="2" FontSize="30" Click="Gas_OnClick">Gas</Button>
+        <Button Grid.Row="2" Grid.Column="1" FontSize="30" Click="Brake_OnClick">Brake</Button>
+    </Grid>
+</Window>

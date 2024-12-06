@@ -1,0 +1,22 @@
+﻿<Window x:Class="Mondreise.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mondreise"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="220,96,220,136" >
+
+            <RadioButton Content="in Tagen" HorizontalAlignment="Left" Margin="74,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.797,0.669" Name="RadioButtonTage" />
+            <RadioButton Content="in Stunden" HorizontalAlignment="Left" Margin="198,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.837,-3.181" Name="RadioButtonStunden"/>
+            <TextBlock Text="Geschwindigkeit in km/h" Height="20" Margin="35,92,180,90"/>
+            <Button Content="Berechnen" HorizontalAlignment="Left" Width="200" Margin="74,140,0,42" Name="SubmitButton" Click="SubmitButton_OnClick"/>
+            <TextBox HorizontalAlignment="Left" Margin="198,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Name="GeschwindigkeitInput"/>
+
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="253,303,0,0" TextWrapping="Wrap" Text="Ausgabe Reisedauer" VerticalAlignment="Top" Width="147"/>
+        <TextBox HorizontalAlignment="Left" Margin="424,303,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsEnabled="False" Name="Output"/>
+    </Grid>
+</Window>

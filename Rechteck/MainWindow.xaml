@@ -1,0 +1,28 @@
+﻿<Window x:Class="Rechteck.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rechteck"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Breite des Rechtecks" Grid.Row="0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="BreiteInput" Background="Gray" Opacity="0.5"/>
+        <TextBlock Text="Höhe des Rechtecks" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="HoeheInput" Background="Gray" Opacity="0.5"/>
+        <TextBlock Text="Ausgabe (Fläche)" Grid.Row="2" Grid.Column="0"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="submit" Click="ButtonBase_OnClick"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="FlaecheAusgabe" Background="Gray" Opacity="0.5" IsReadOnly="True"/>
+    </Grid>    
+</Window>

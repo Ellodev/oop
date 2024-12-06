@@ -4,9 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Car car1 = new Car("BMW", "Schwarz", 2000, 200, 4);
-        Motorcycle motorcycle1 = new Motorcycle("yamaha", "black", 2007, 500);
-        Mountainbike mountainbike1 = new Mountainbike("Canyon", "brown", 2024, 7, 20);
+        Car car1 = new Car("BMW", "Schwarz", 2000, 200, 4, VehicleCondition.LightlyUsed);
+        Motorcycle motorcycle1 = new Motorcycle("yamaha", "black", 2007, 500, VehicleCondition.New);
+        Mountainbike mountainbike1 = new Mountainbike("Canyon", "brown", 2024, 7, 20, VehicleCondition.HeavilyUsed);
         
         
         car1.PrintInfo();

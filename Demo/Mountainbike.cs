@@ -5,8 +5,9 @@ namespace Demo
         internal int gears { get; }
         internal int wheelDiameter { get; }
 
-        internal Mountainbike(string brand, string color, int yearOfConstruction, int gears, int wheelDiameter)
-        : base(brand, color, yearOfConstruction)
+        internal Mountainbike(string brand, string color, int yearOfConstruction, int gears, int wheelDiameter,
+            VehicleCondition condition)
+        : base(brand, color, yearOfConstruction, condition)
         {
             this.gears = gears;
             this.wheelDiameter = wheelDiameter;
@@ -14,7 +15,7 @@ namespace Demo
 
         internal override void PrintInfo()
         {
-            Console.WriteLine($"Brand: {Brand}, Color: {Color}, year of construction: {YearOfConstruction}, gears: {gears}, Wheel diameter: {wheelDiameter}");
+            Console.WriteLine($"Brand: {Brand}, Color: {Color}, year of construction: {YearOfConstruction}, gears: {gears}, Wheel diameter: {wheelDiameter}, Zustand: {VehicleCondition}");
         }
 
         internal override void Move()
