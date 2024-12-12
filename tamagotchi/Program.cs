@@ -1,53 +1,130 @@
-﻿namespace tamagotchi
+﻿using System.Linq.Expressions;
+
+namespace tamagotchi
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Pet Dog = new Pet("Dog", 3);
-            Console.WriteLine("Welcome to your Tamagotchi!");
-            Dog.PrintInfo();
-            Console.WriteLine("\n");
-
-            while (Dog.IsAlive)
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            bool falseInput = true;
+            Pet currentPet = null;
+            
+            while (falseInput)
             {
-                Console.WriteLine("Choose an action:");
-                Console.WriteLine("1. Feed");
-                Console.WriteLine("2. Play");
-                Console.WriteLine("3. Sleep");
-                Console.WriteLine("4. Check Status");
-                Console.WriteLine("5. Exit");
-                Console.Write("Enter the number of your choice: ");
+                Console.WriteLine("Welcome to your Tamagotchi! Please choose one of the following pets (cat has a special play mode):");
+                Console.WriteLine("1. Dog");
+                Console.WriteLine("2. Cat");
+                Console.WriteLine("3. Snake");
+                Console.WriteLine("4. Bird");
+                Console.WriteLine("5. Frog");
+                Console.WriteLine("6. T-rex");
+                Console.Write("Enter your choice (1-6): ");
                 string choice = Console.ReadLine();
-                Console.Clear();
-
                 switch (choice)
                 {
                     case "1":
-                        Dog.Feed();
+                        Dog dog = new Dog(getName());
+                        falseInput = false;
+                        currentPet = dog;
                         break;
                     case "2":
-                        Dog.Play();
+                        Cat cat = new Cat(getName());
+                        falseInput = false;
+                        currentPet = cat;
                         break;
                     case "3":
-                        Dog.Sleep();
+                        Snake snake = new Snake(getName());
+                        falseInput = false;
+                        currentPet = snake;
                         break;
                     case "4":
-                        Dog.PrintInfo();
+                        Bird bird = new Bird(getName());
+                        falseInput = false;
+                        currentPet = bird;
                         break;
                     case "5":
-                        Console.WriteLine("Exiting the game.");
-                        return;
+                        Frog frog = new Frog(getName());
+                        falseInput = false;
+                        currentPet = frog;
+                        break;
+                    case "6":
+                        Trex trex = new Trex(getName());
+                        falseInput = false;
+                        currentPet = trex;
+                        break;
                     default:
-                        Console.WriteLine("Invalid choice. Please try again.");
+                        Console.WriteLine("Invalid input, please try again.");
                         break;
                 }
-                Dog.TimePass();
-                Console.Write("\n");
+                
+                Console.Clear();
+                CancellationTokenSource cts = new CancellationTokenSource();
+                Task backgroundTask = TimePassing(async () =>
+                {
+                    currentPet.TimePass();
+                }, TimeSpan.FromMinutes(5), cts.Token);
+                
+                string currentMessage = "";
+                
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine(currentMessage);
+                    currentPet.PrintInfo();
+                    Console.WriteLine("\nChoose an option:");
+                    Console.WriteLine("1. Feed");
+                    Console.WriteLine("2. Play");
+                    Console.WriteLine("3. Sleep");
+                    Console.WriteLine("4. Exit");
+                    Console.Write("Enter your choice: ");
+                    char choice2 = Console.ReadKey().KeyChar;
+                    switch (choice2)
+                    {
+                        case '1':
+                            currentMessage = currentPet.Feed();
+                            break;
+                        case '2':
+                            currentMessage = currentPet.Play();
+                            break;
+                        case '3':
+                            currentMessage =  currentPet.Sleep();
+                            break;
+                        case '4':
+                            Console.WriteLine("Exiting...");
+                            cts.Cancel();
+                            return;
+                        default:
+                            Console.WriteLine("Invalid choice. Try again.");
+                            break;
+                    }
+                }
             }
+        } 
 
-            Console.WriteLine("Your pet has passed away. yikes ＼（〇_ｏ）／");
+        static string getName()
+        {
+            Console.Write("Enter the name of your pet: ");
+            string name = Console.ReadLine();
+            return name;
         }
+        
+        static async Task TimePassing(Func<Task> task, TimeSpan interval, CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    await task(); // Run the provided task
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Error in background task]: {ex.Message}");
+                }
+                await Task.Delay(interval, token); // Wait for the interval or until cancellation
+            }
+        }
+        
     }
 
 }    

@@ -2,7 +2,7 @@
 
 public class Dog : Pet
 {
-    public Dog(string name, int weight) : base(name, weight)
+    public Dog(string name) : base(name, 10)
     {
     }
 
@@ -10,4 +10,5 @@ public class Dog : Pet
     {
         Console.WriteLine($"{Name} is barking!");
     }
+    
 }

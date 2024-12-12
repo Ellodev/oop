@@ -6,57 +6,66 @@ public class Pet
     public int Hunger { get; set; }
     public int Happiness { get; set; }
     public int Energy { get; set; }
-    public int Age { get; }
+    public int Age { get; set; }
     public int Weight { get; }
     public int Health { get; set;  }
     public bool IsAlive { get; set; }
     
     public Pet(string name, int weight) {
         this.Name = name;
-        this.Hunger = 0;
-        this.Happiness = 100;
-        this.Energy = 100;
-        this.Age = 0;
+        this.Hunger = 40;
+        this.Happiness = 30;
+        this.Energy = 30;
+        this.Age = 1;
         this.Weight = weight;
         this.Health = 100;
         IsAlive = true;
     }
 
-    public void Feed()
+    public string Feed()
     {
-        if (Hunger > 10)
+        if (Hunger > 60)
         {
-            this.Hunger = Hunger -10;
-            this.Energy = Energy - 5;
-            Console.WriteLine($"{Name} has been fed!");
+            Hunger = 100;
+            return $"{Name} has been fed!";
         }
         else
         {
-            Console.WriteLine($"{Name} is not hungry enough to need feeding.");
+            return $"{Name} is not hungry! `(*>﹏<*)′";
         }
     }
     
-    public void Play()
+    public virtual string Play()
     {
         if (Energy > 10)
         {
             this.Happiness = Happiness + 10;
             this.Energy = Energy - 10;
             this.Health = Health + 5;
-            Console.WriteLine($"{Name} is playing and having fun!");
+            return $"{Name} is playing and having fun! (❁´◡`❁)";
         }
         else
         {
-            Console.WriteLine($"{Name} is too tired to play.");
+            return $"{Name} is too tired to play. (´。＿。｀)";
         }
     }
     
-    public void Sleep()
+    public string Sleep()
     {
-        this.Energy = Energy + 10;
-        this.Hunger = Hunger + 5;
-        this.Health = Health + 5;
-        Console.WriteLine($"{Name} is sleeping to regain energy.");
+        if (Energy < 20)
+        {
+            this.Energy = 100;
+            updateHunger(5);
+            updateHealth(5);
+            Console.Clear();
+            Console.WriteLine($"{Name} is sleeping!");
+            Thread.Sleep(3000);
+            return $"{Name} has slept (✿◠‿◠)";
+        }
+        else
+        {
+            return $"{Name} isnt tired. (⊙_⊙;)";
+        }
     }
     
     public void PrintInfo()
@@ -73,23 +82,41 @@ public class Pet
 
     public void TimePass()
     {
-        this.Hunger += 5;
-        this.Energy -= 5;
-        this.Health -= 5;
-        
-        if (Hunger >= 100)
+        updateHealth(5);
+        updateHunger(5);
+        updateHealth(-5);
+        Age++;
+    }
+
+    public void updateHealth(int amount)
+    {
+        this.Health += amount;
+        if (this.Health > 100)
         {
-            Health -= 15;
+            this.Health = 100;
         }
-        
-        if (Energy <= 0)
-        {
-            Health -= 10;
-        }
-        
         if (Health <= 0)
         {
             IsAlive = false;
+        }
+    }
+
+    public void updateHunger(int amount)
+    {
+        this.Hunger += amount;
+        if (this.Hunger >= 100)
+        {
+            updateHealth(-5);
+            this.Hunger = 100;
+        }
+    }
+
+    public void updateEnergy(int amount)
+    {
+        this.Energy += amount;
+        if (this.Energy > 100)
+        {
+            this.Energy = 100;
         }
     }
 }
