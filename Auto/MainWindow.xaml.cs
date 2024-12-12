@@ -18,15 +18,18 @@ public partial class MainWindow : Window
 {
     private Car? selectedCar;
     private bool isUpdating = false;
+    private bool isGasActive = false;
+    private bool isBrakeActive = false;
+
     public MainWindow()
     {
         InitializeComponent();
         
         var cars = new List<Car>()
         {
-            new Car("porsche", 502),
-            new Car("Ferrari", 986),
-            new Car("VW", 138),
+            new Car("Porsche", 250),
+            new Car("Ferrari", 370),
+            new Car("Opel", 90),
         };
         
         CarComboBox.ItemsSource = cars;
@@ -49,7 +52,6 @@ public partial class MainWindow : Window
             isUpdating = true;
             await UpdateDisplayAsync();
         }
-        
     }
     
     private void CarComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,15 +72,36 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Gas_OnClick(object sender, RoutedEventArgs e)
+    private async void Gas_OnClick(object sender, RoutedEventArgs e)
     {
-        if (selectedCar != null)
+        if (selectedCar != null && !isBrakeActive)
         {
-            selectedCar.GibGas();
-            Geschwindigkeit.Text = Convert.ToString(selectedCar.GetAktuelleGeschwindigkeit());
-            FuelLevel.Value = selectedCar.GetTankFuellstand();
+            isGasActive = true;
+            while (isGasActive)
+            {
+                selectedCar.GibGas();
+                Geschwindigkeit.Text = selectedCar.GetAktuelleGeschwindigkeit().ToString();
+                FuelLevel.Value = selectedCar.GetTankFuellstand();
+                await Task.Delay(100);
+            }
         }
     }
+
+    private async void Brake_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (selectedCar != null && !isGasActive)
+        {
+            isBrakeActive = true;
+            while (isBrakeActive)
+            {
+                selectedCar.Bremse();
+                Geschwindigkeit.Text = selectedCar.GetAktuelleGeschwindigkeit().ToString();
+                FuelLevel.Value = selectedCar.GetTankFuellstand();
+                await Task.Delay(100);
+            }
+        }
+    }
+
     private async Task UpdateDisplayAsync()
     {
         while (isUpdating)
@@ -105,9 +128,9 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Brake_OnClick(object sender, RoutedEventArgs e)
+    private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
     {
-        selectedCar.Bremse();
+        isGasActive = false;
+        isBrakeActive = false;
     }
-
 }
