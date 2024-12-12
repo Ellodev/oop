@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tannenbaum", "Tannenbaum\Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto", "Auto\Auto.csproj", "{451FF5F0-7101-49EB-9435-5A78606B3E3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tamagotchi", "tamagotchi\tamagotchi.csproj", "{EBADA73B-4029-487A-A996-94F58720E8B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{451FF5F0-7101-49EB-9435-5A78606B3E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451FF5F0-7101-49EB-9435-5A78606B3E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451FF5F0-7101-49EB-9435-5A78606B3E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBADA73B-4029-487A-A996-94F58720E8B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBADA73B-4029-487A-A996-94F58720E8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBADA73B-4029-487A-A996-94F58720E8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBADA73B-4029-487A-A996-94F58720E8B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
